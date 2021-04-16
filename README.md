@@ -2,7 +2,7 @@
   <a href="https://write-your-card.netlify.app" aria-hidden="true"><img src="https://raw.githubusercontent.com/MD-Developers/card-generator/main/img/thumbail.png" alt="Write-Your-Card" width="1200" /></a>
 </h1>
 <div align="center">
-    [![Netlify Status](https://api.netlify.com/api/v1/badges/325474c0-b3ba-4765-a455-b94149af8ea5/deploy-status)](https://app.netlify.com/sites/write-your-card/deploys)
+    [![Netlify Status](https://api.netlify.com/api/v1/badges/325474c0-b3ba-4765-a455-b94149af8ea5/deploy-status)](https://app.netlify.com/sites/write-your-card/deploys)]
 </div>
 
 Un generador de imagenes con texto basado en canvas en el cual se le puede agregar cualquier texto en 3 distintas posiciones, cambir de imagen y descargar la imagen generada.
