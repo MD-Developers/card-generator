@@ -1,0 +1,183 @@
+/* ****************************** */
+/* Estilos Base */
+/* ****************************** */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 16pt;
+
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+/* ****************************** */
+/* Estilos de los contenedores principales */
+/* ****************************** */
+.contenedor {
+    width: 100vw;
+    min-height: 90vh; /*CAmbio*/
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.options {
+    background-color: lightcoral;
+    width: 250px;
+    height: 480px;
+    margin: 0 10px;
+
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color:  #90A4AE #CFD8DC;
+}
+
+/* ****************************** */
+/* Estilos del canvas */
+/* ****************************** */
+.imagen {
+    border: 2px dashed grey;
+}
+
+/* ****************************** */
+/* Estilos de las opciones */
+/* ****************************** */
+.grupo {
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+.grupo-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.grupo label {
+    color: #fff;
+    margin-bottom: 5px;
+}
+.grupo input[type=text],
+.grupo textarea{
+    line-height: 1.5;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+.grupo button {
+    padding: 5px 15px;
+    cursor: pointer;
+    display: inline-block;
+    
+    background-color: #009bad;
+    color: #fff;
+    margin:0;
+    border: none;
+    transition: all .3s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.grupo button:hover{
+    background-color: #005da3;
+}
+.bottom {
+    align-self: center;
+    margin-top: auto;
+    padding-bottom: 10px; 
+}
+
+textarea { 
+    resize: none;
+}
+.horizontal {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.horizontal label {
+    margin: 0;
+    padding-bottom: 5px;
+}
+.grupo-horizontal input[type=color] {
+    height: 100%
+}
+.ancho-60 {
+    width: 60%;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file {
+    text-align: center;
+    background-color: #009bad;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.custom-file:hover {
+    background-color: #005da3;
+}
+.grupo select {
+    width: 100%;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+
+/* ****************************** */
+/* Footer */
+/* ****************************** */
+a {
+    text-decoration: none;
+}
+.created {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #3b859d;
+    margin-bottom: 20px;
+}
+
+.created a { color: #36221c; }
+.created a:hover { text-decoration: underline; }
+
+/* ****************************** */
+/* Media queries */
+/* ****************************** */
+@media screen and ( max-width: 760px ) {
+    body {
+        overflow-x: auto;
+    }
+    .contenedor {
+        flex-direction: column-reverse;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .options {
+        justify-content: center;
+        flex-direction: row;
+        width: 95%;
+        height: auto;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    .grupo {
+        margin: 0 5px;
+        justify-content: center;
+    }
+    .horizontal {
+        flex-direction: column;
+    }
+    .bottom {
+        margin-bottom: 0;
+        margin-top: 20px;
+    }
+}
