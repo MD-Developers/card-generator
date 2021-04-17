@@ -11,14 +11,27 @@ const nombres = document.getElementById("nombres");
 nombres.value = "";
 const colorNombre = document.getElementById("colorNombre");
 
-let nombresObj = {
-    texto: '',
-    x: 0,
-    y: 0,
-}
 var selectedText = -1;
 var offsetX = 0;
 var offsetX = 0;
+
+let textos = [
+    {
+        texto: '',
+        x: 0,
+        y: 0,
+    },
+    {
+        texto: '',
+        x: 0,
+        y: 0,
+    },
+    {
+        texto: '',
+        x: 0,
+        y: 0,
+    }
+];
 
 const opacidad = document.getElementById("opacidad");
 
@@ -47,8 +60,18 @@ initCanvas();
 //EventListeners para vigilar los click e inputs.
 imageFile.addEventListener("change", handleImage);
 
-titulo.addEventListener("keyup", render);
-mensaje.addEventListener("keyup", render);
+titulo.addEventListener("keyup", () => {
+    textos[0].texto = titulo.value;
+    render();
+});
+mensaje.addEventListener("keyup", () => {
+    textos[2].texto = mensaje.value;
+    render();
+});
+nombres.addEventListener("keyup", () => {
+    textos[1].texto = nombres.value;
+    render();
+});
 
 opacidad.addEventListener("input", render);
 
@@ -71,10 +94,6 @@ namesFont.addEventListener('change', (event) => {
     render();
 });
 
-nombres.addEventListener("keyup", () => {  //Cambiamos :P
-    nombresObj.texto = nombres.value;
-    render();
-});
 colorNombre.addEventListener("change", render);
 
 //Creamos nuevos Listeners :D
@@ -95,11 +114,16 @@ function initCanvas() {
     canvas.height = canvasHeight;
 
     //Iniciamos las posiciones de X y Y de nuestro objeto de Nombre.
-    nombresObj.x =  canvas.width/2;
-    nombresObj.y =  canvas.height/2;
+    textos[0].x =  (canvas.width/2)-8;
+    textos[0].y =  50;
+
+    textos[1].x =  canvas.width/2;
+    textos[1].y =  canvas.height/2;
+
+    textos[2].x =  canvas.width/2;
+    textos[2].y =  canvas.height - 75;
     offsetX = canvas.offsetLeft;
     offsetY = canvas.offsetTop;
-
     //Colocamos el fondo del color por defecto, que sera e gris.
     drawBackground();
 
@@ -175,20 +199,20 @@ function drawText(text, positionX, positionY) {
     ctx.lineJoin = 'round';
 
     // Cambiamos nuestra variable 'top' para que haga salto de linea automatico.
-    const top = saltosDeLinea(titulo.value).map((linea) => Object.assign({}, {
+    const top = saltosDeLinea(textos[0].texto).map((linea) => Object.assign({}, {
         text: `${linea}`,
         font: `bolder 17pt ${fuenteTitulo}`,
         fillStyle: colorTitulo.value
     }));
 
-    const bottom = saltosDeLinea(mensaje.value).map((linea, index) => Object.assign({}, {
+    const bottom = saltosDeLinea(textos[2].texto).map((linea, index) => Object.assign({}, {
         text: `${linea}`,
         font: `bolder 17pt ${fuenteMensaje}`,
         fillStyle: colorMensaje.value
     }));
 
     //Variable "middle" para mostrar los nombres en el medio.
-    const middle = saltosDeLinea(nombresObj.texto).map((linea, index) => Object.assign({}, {
+    const middle = saltosDeLinea(textos[1].texto).map((linea, index) => Object.assign({}, {
         text: `${linea}`,
         font: `bolder 17pt ${fuenteNombres}`,
         fillStyle: colorNombre.value
@@ -198,14 +222,18 @@ function drawText(text, positionX, positionY) {
     switch (text) {
         case 'top':
             position = top;
+            positionX = textos[0].x;
+            positionY = textos[0].y;
             break;
         case 'bottom':
             position = bottom;
+            positionX = textos[2].x;
+            positionY = textos[2].y;
             break;
         case 'middle':
             position = middle;
-            positionX = nombresObj.x;
-            positionY = nombresObj.y;
+            positionX = textos[1].x;
+            positionY = textos[1].y;
             break;
     }
 
@@ -241,13 +269,13 @@ function descargar() {
     link.click();
 }
 
-function saltosDeLinea(str){ //nuevo
+function saltosDeLinea(str){ 
     return str.match(/[\s\S]{1,30}/g) || [];
 }
 
 //Mover Nombre
-function textHitBox(x, y) {
-  let texto = nombresObj;
+function textHitBox(x, y, index) {
+  let texto = textos[index];
   return (x >= texto.x - 300 && x <= texto.x + 300 && y >= texto.y - 30 && y <= texto.y + 30);
 }
 
@@ -256,8 +284,10 @@ function handleMouseDown(e) {
     startX = parseInt(e.clientX - offsetX);
     startY = parseInt(e.clientY - offsetY);
 
-    if(textHitBox(startX, startY))
-        selectedText = 1;
+    for (let index = 0; index < textos.length; index++) {
+        if(textHitBox(startX, startY, index))
+            selectedText = index;
+    }
 }
 function handleMouseUp(e) {
     e.preventDefault();
@@ -280,8 +310,8 @@ function handleMouseMove(e) {
     startX = mouseX;
     startY = mouseY;
 
-    nombresObj.x += dx;
-    nombresObj.y += dy;
+    textos[selectedText].x += dx;
+    textos[selectedText].y += dy;
     render();
 }
 
