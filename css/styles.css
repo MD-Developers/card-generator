@@ -45,6 +45,7 @@ body{
 /* ****************************** */
 .imagen {
     border: 2px dashed grey;
+    touch-action: none;
 }
 
 /* ****************************** */

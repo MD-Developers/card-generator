@@ -287,8 +287,12 @@ function textHitBox(x, y, index) {
 
 function handleMouseDown(e) {
     e.preventDefault();
-    startX = parseInt(e.clientX - offsetX);
-    startY = parseInt(e.clientY - offsetY);
+
+    let valueX = e.type == 'mousedown' ? e.clientX : e.touches[0].pageX;
+    let valueY = e.type == 'mousedown' ? e.clientY : e.touches[0].pageY;
+
+    startX = parseInt(valueX - offsetX);
+    startY = parseInt(valueY - offsetY);
 
     for (let index = 0; index < textos.length; index++) {
         if(textHitBox(startX, startY, index))
@@ -308,8 +312,12 @@ function handleMouseMove(e) {
         return;
     }
     e.preventDefault();
-    mouseX = parseInt(e.clientX - offsetX);
-    mouseY = parseInt(e.clientY - offsetY);
+
+    let valueX = e.type == 'mousemove' ? e.clientX : e.touches[0].pageX;
+    let valueY = e.type == 'mousemove' ? e.clientY : e.touches[0].pageY;
+
+    mouseX = parseInt(valueX - offsetX);
+    mouseY = parseInt(valueY - offsetY);
 
     var dx = mouseX - startX;
     var dy = mouseY - startY;
