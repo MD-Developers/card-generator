@@ -96,11 +96,17 @@ namesFont.addEventListener('change', (event) => {
 
 colorNombre.addEventListener("change", render);
 
-//Creamos nuevos Listeners :D
+//Listeners para mover con el mouse :D
 canvas.addEventListener('mousedown', handleMouseDown);
 canvas.addEventListener('mousemove', handleMouseMove);
 canvas.addEventListener('mouseup', handleMouseUp);
 canvas.addEventListener('mouseout', handleMouseOut);
+
+//Listeners para mover con touch del cel :D
+canvas.addEventListener('touchstart', handleMouseDown);
+canvas.addEventListener('touchmove', handleMouseMove);
+canvas.addEventListener('touchend', handleMouseUp);
+canvas.addEventListener('touchcancel', handleMouseOut);
 
 /*******************+/
 /******Fnciones******/
